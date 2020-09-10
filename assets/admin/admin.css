@@ -1,0 +1,26 @@
+/**
+ * Insert Headers, Body and Footers
+ * @author      Francesco Taurino <dev.francescotaurino@gmail.com>
+ * @copyright   Copyright (c) 2020, Francesco Taurino
+ * @license     https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ */
+label.ihbaf-label
+{
+	color: #23282d ;
+	font-size: 1.3em ;
+}
+
+textarea.ihbaf-textarea
+{
+	width:98%;
+	font-family:monospace;
+	font-size: 12px;
+}
+
+input.ihbaf-input
+{
+	width:6em;
+}
+
+/* Temp: Nel Post il codice si sovrappone alla linea dei numeri */
+#poststuff .CodeMirror-scroll { padding-left: 25px }

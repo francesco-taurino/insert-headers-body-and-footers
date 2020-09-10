@@ -37,9 +37,19 @@ const FILE = __FILE__;
 // Il percorso di questa directory
 const DIR = __DIR__;
 
-require_once('vendor/autoload.php');
-$manager = new \Ihbaf\Inc\PluginAPIManager(); 
-$manager->register( new \Ihbaf\Admin\AdminPage);
-$manager->register( new \Ihbaf\Admin\AdminMetabox );
-$manager->register( new \Ihbaf\Admin\CodeMirror );
-$manager->register( new \Ihbaf\Frontend\Frontend);
+add_action( 'plugins_loaded', function() {
+	
+	require_once('vendor/autoload.php');
+	
+	$manager = new \Ihbaf\Inc\PluginAPIManager(); 
+
+	// Non carica la parte amministrativa se l'utente non ha le capacità definite in REQUIRED_CAPABILITIES
+	if( \Ihbaf\Helpers\Utils::is_user_authorized() ){
+		$manager->register( new \Ihbaf\Admin\AdminPage);
+		$manager->register( new \Ihbaf\Admin\AdminMetabox );
+		$manager->register( new \Ihbaf\Admin\CodeMirror );
+	}
+
+	$manager->register( new \Ihbaf\Frontend\Frontend);
+
+}, 10, 1 );

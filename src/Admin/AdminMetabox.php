@@ -50,7 +50,12 @@ class AdminMetabox implements ActionHookSubscriberInterface, FilterHookSubscribe
     * Aggiunge un metabox per tutti i tipi di post
     */
     public function add_meta_boxes( $post_type, $post ) 
-    {
+    {   
+        // Non aggiunge il metabox se l'utente non è un amministratore
+        if( ! \Ihbaf\Helpers\Utils::is_user_authorized() ){
+            return;
+        }
+
         add_meta_box(
             \Ihbaf\PLUGIN_NAME . '-' . $post_type,
             \Ihbaf\PLUGIN_NAME . ' ( MetaBox )',
@@ -94,7 +99,11 @@ class AdminMetabox implements ActionHookSubscriberInterface, FilterHookSubscribe
                 return $post_id;
         }
 
-        
+        // esci se l'utente non è un amministratore
+        if( ! \Ihbaf\Helpers\Utils::is_user_authorized() ){
+            return;
+        }
+
 
         // Le priorità vengono mostrate e salvate solo nel pannello di amministrazione del plugin
         foreach (['_header','_body','_footer'] as $key ) :
